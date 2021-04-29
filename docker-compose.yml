@@ -5,5 +5,5 @@ services:
         image: feathers-chat
         command: npm run eslint
     test:
-        image: feathers-chat-test
+        image: feathers-chat
         command: npm test
