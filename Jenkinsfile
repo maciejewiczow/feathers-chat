@@ -14,7 +14,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh ' docker-compose up'
+                sh '''
+                    docker-compose up
+                    code = docker-compose ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | grep -v '^0' | wc -l | tr -d ' '
+                    [ $code -neq 0 ] && exit $code
+                '''
             }
         }
     }
