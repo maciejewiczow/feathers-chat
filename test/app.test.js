@@ -29,9 +29,9 @@ describe('Feathers application tests', () => {
     assert.ok(data.indexOf('<html lang="en">') !== -1);
   });
 
-  //   it('fails', () => {
-  //     assert.ok(false);
-  //   });
+  it('fails', () => {
+    assert.ok(false);
+  });
 
   describe('404', function() {
     it('shows a 404 HTML page', async () => {
