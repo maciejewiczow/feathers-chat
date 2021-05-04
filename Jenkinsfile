@@ -19,7 +19,21 @@ pipeline {
         }
     }
 
-    // post {
-
-    // }
+    post {
+        failure {
+            emailext (
+                attachLog: true,
+                body: '$PROJECT_NAME - Build # $BUILD_NUMBER Failed. See attached logs to view the results.',
+                recipientProviders: [requestor()],
+                subject: '$DEFAULT_SUBJECT'
+            )
+        }
+        success {
+            emailext (
+                body: '$PROJECT_NAME - Build # $BUILD_NUMBER ran successfully',
+                recipientProviders: [requestor()],
+                subject: '$DEFAULT_SUBJECT'
+            )
+        }
+    }
 }
