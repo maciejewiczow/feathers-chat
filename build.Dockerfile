@@ -4,6 +4,4 @@ COPY . /application
 
 WORKDIR /application
 
-RUN false
-
 RUN npm ci
