@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-    eslint:
-        image: feathers-chat
-        command: npm run eslint
-    test:
-        image: feathers-chat
-        command: npm test
+    chat:
+        image: feathers-chat:latest
+        environment:
+            - "PORT=3030"
+        ports:
+            - "3030:3030"

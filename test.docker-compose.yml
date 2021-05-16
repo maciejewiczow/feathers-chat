@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+    eslint:
+        image: feathers-chat-build
+        command: npm run eslint
+    test:
+        image: feathers-chat-build
+        command: npm test

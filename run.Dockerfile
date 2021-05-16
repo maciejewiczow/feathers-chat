@@ -1,3 +1,3 @@
-FROM feathers-chat:latest
+FROM feathers-chat-build:latest
 
 CMD ["npm", "start"]

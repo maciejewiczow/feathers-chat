@@ -9,13 +9,19 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh script: ' docker build -f build.Dockerfile -t feathers-chat:latest .', label: 'Build docker image'
+                sh script: ' docker build -f build.Dockerfile -t feathers-chat-build:latest .', label: 'Build docker image'
             }
         }
         stage('Test') {
             steps {
-                sh script: 'docker-compose up', label: 'Start test and eslint containers'
+                sh script: 'docker-compose -f test.docker-compose.yml up', label: 'Start test and eslint containers'
                 sh script: '''[ `docker-compose ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | grep -v '^0' | wc -l | tr -d ' '` = "0" ]''', label: 'Check container exit codes'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh label: 'Build deploy image', script: 'docker build -f run.Dockerfile -t feathers-chat:latest .'
+                sh label: 'Deploy container(s)', script: 'docker-compose up -d'
             }
         }
     }
